@@ -1,0 +1,236 @@
+/*css for admin widgets*/
+
+/*for FilteredSelectMultiple*/
+/* SELECTOR (FILTER INTERFACE) */
+
+.selector {
+    width: 100%;
+    float: left;
+}
+
+.selector > * > h2{
+	font-size: 1em;
+}
+
+.selector select {
+    width: 100% !important;
+    height: 17.2em;
+}
+
+.selector-available, .selector-chosen {
+    float: left;
+    width: 47%;
+    text-align: center;
+    margin-bottom: 0px !important;
+    margin-top: 1em;
+}
+
+.selector-chosen select {
+    border-top: none;
+    overflow-x: scroll;
+}
+
+.selector-available select {
+    overflow-x: scroll;
+}
+
+
+.selector-available h2, .selector-chosen h2 {
+    border: 1px solid #ccc;
+}
+
+.selector .selector-available h2 {
+    background: white url(/static/admin/img/nav-bg.gif) bottom left repeat-x;
+    color: #666;
+}
+div.selector{
+    padding: 1em;
+    margin: auto;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.selector .selector-filter {
+    background: white;
+    border: 1px solid #ccc;
+    border-width: 0 1px;
+    padding: 3px;
+    color: #999;
+    font-size: 10px;
+    margin: 0;
+    text-align: left;
+}
+
+.selector .selector-filter label,
+.inline-group .aligned .selector .selector-filter label {
+    width: 16px;
+    padding: 2px;
+}
+
+.selector .selector-available input {
+    width: 100%;
+}
+
+.selector ul.selector-chooser {
+    float: left;
+    width: 4%;
+    height: 50px;
+    background: url(/static/admin/img/chooser-bg.gif) top center no-repeat;
+    margin: 10em 5px 0 5px;
+    padding: 0;
+}
+
+.selector-chooser li {
+    margin: 0;
+    padding: 3px;
+    list-style-type: none;
+}
+
+.selector select {
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.selector-add, .selector-remove {
+    margin: auto;
+    width: 16px;
+    height: 16px;
+    display: block;
+    text-indent: -3000px;
+    overflow: hidden;
+}
+
+.selector-add {
+    background: url(/static/admin/img/selector-icons.gif) 0 -161px no-repeat;
+    cursor: default;
+    margin-bottom: 2px;
+}
+
+.active.selector-add {
+    background: url(/static/admin/img/selector-icons.gif) 0 -187px no-repeat;
+    cursor: pointer;
+}
+
+.selector-remove {
+    background: url(/static/admin/img/selector-icons.gif) 0 -109px no-repeat;
+    cursor: default;
+}
+
+.active.selector-remove {
+    background: url(/static/admin/img/selector-icons.gif) 0 -135px no-repeat;
+    cursor: pointer;
+}
+
+a.selector-chooseall, a.selector-clearall {
+    display: inline-block;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+    color: #666;
+}
+
+a.selector-chooseall {
+    padding: 3px 18px 3px 0;
+}
+
+a.selector-clearall {
+    padding: 3px 0 3px 18px;
+}
+
+a.active.selector-chooseall:hover, a.active.selector-clearall:hover {
+    color: #036;
+}
+
+a.selector-chooseall {
+    background: url(/static/admin/img/selector-icons.gif) right -263px no-repeat;
+    cursor: default;
+}
+
+a.active.selector-chooseall {
+    background: url(/static/admin/img/selector-icons.gif) right -289px no-repeat;
+    cursor: pointer;
+}
+
+a.selector-clearall {
+    background: url(/static/admin/img/selector-icons.gif) left -211px no-repeat;
+    cursor: default;
+}
+
+a.active.selector-clearall {
+    background: url(/static/admin/img/selector-icons.gif) left -237px no-repeat;
+    cursor: pointer;
+}
+
+/* STACKED SELECTORS */
+
+.stacked {
+    float: left;
+    width: 500px;
+}
+
+.stacked select {
+    width: 480px;
+    height: 10.1em;
+}
+
+.stacked .selector-available, .stacked .selector-chosen {
+    width: 480px;
+}
+
+.stacked .selector-available {
+    margin-bottom: 0;
+}
+
+.stacked .selector-available input {
+    width: 442px;
+}
+
+.stacked ul.selector-chooser {
+    height: 22px;
+    width: 50px;
+    margin: 0 0 3px 40%;
+    background: url(/static/admin/img/chooser_stacked-bg.gif) top center no-repeat;
+}
+
+.stacked .selector-chooser li {
+    float: left;
+    padding: 3px 3px 3px 5px;
+}
+
+.stacked .selector-chooseall, .stacked .selector-clearall {
+    display: none;
+}
+
+.stacked .selector-add {
+    background: url(/static/admin/img/selector-icons.gif) 0 -57px no-repeat;
+    cursor: default;
+}
+
+.stacked .active.selector-add {
+    background: url(/static/admin/img/selector-icons.gif) 0 -83px no-repeat;
+    cursor: pointer;
+}
+
+.stacked .selector-remove {
+    background: url(/static/admin/img/selector-icons.gif) 0 -5px no-repeat;
+    cursor: default;
+}
+
+.stacked .active.selector-remove {
+    background: url(/static/admin/img/selector-icons.gif) 0 -31px no-repeat;
+    cursor: pointer;
+}
+.m2m{
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+    margin-bottom: 1em;
+}
+.contenedor-m2m{
+	overflow-x: hidden;
+	margin-top: 2em;
+    margin-bottom: 1em;
+}

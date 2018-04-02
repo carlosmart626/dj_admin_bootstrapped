@@ -1,0 +1,14 @@
+{% load i18n %}
+<div class="row">
+	<div class="col-md-6">
+	    {% if show_delete_link %}<a class="btn btn-danger deletelink" href="delete/"><i class="fa fa-times-circle-o"></i> {% trans "Delete" %}</a>{% endif %}
+	</div>
+	<div class="col-md-6">
+		<div class="pull-right">
+			{% if show_save_as_new %}<button type="submit" class="btn btn-default" name="_saveasnew" {{ onclick_attrib }}>{% trans 'Save as new' %}</button>{%endif%}
+			{% if show_save_and_add_another %}<button type="submit" class="btn btn-default" name="_addanother" {{ onclick_attrib }}><i class="fa fa-plus-square"></i> {% trans 'Save and add another' %}</button>{% endif %}
+			{% if show_save_and_continue %}<button type="submit" class="btn btn-info" name="_continue" {{ onclick_attrib }}><i class="typcn typcn-pencil"></i> {% trans 'Save and continue editing' %}</button>{% endif %}
+			{% if show_save %}<button  type="submit" class="btn btn-success default" name="_save" {{ onclick_attrib }}><i class="fa fa-floppy-o"></i> {% trans 'Save' %}</button>{% endif %}
+		</div>
+	</div>
+</div>

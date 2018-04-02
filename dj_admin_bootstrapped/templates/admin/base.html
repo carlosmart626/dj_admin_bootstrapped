@@ -1,0 +1,231 @@
+{% load admin_static bootstrapped_goodies_tags %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    {% block extrastyle %}{% endblock %}
+
+    <!-- Le styles, placed after extrastyle to correctly override default styling -->
+    <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet"/>
+    <style type="text/css">
+        html {
+          position: relative;
+          min-height: 100%;
+        }
+      body {
+        padding-top: 80px;
+        margin-bottom: 60px;
+      }
+      .perfil_navbar{
+	      height: 40px;
+	      margin: 5px;
+	      display: block;
+		  margin-left: auto;
+		  margin-right: auto;
+		  -webkit-transition-property: all;
+		  -moz-transition-property: all;
+		  -o-transition-property: all;
+		  transition-property: all;
+		  -webkit-transition-duration: 0.5s;
+		  -moz-transition-duration: 0.5s;
+		  -o-transition-duration: 0.5s;
+      }
+      .perfil_navbar:hover{
+	      -webkit-transform: scale(1.2);
+		  -moz-transform: scale(1.2);
+		  -o-transform: scale(1.2);
+		  transform: scale(1.2);
+      }
+      .save_buttons {
+              bottom: 0;
+              width: 100%;
+              /* Set the fixed height of the footer here */
+              height: 60px;
+              background-color: #f5f5f5;
+            display: block;
+                position: fixed;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+        margin-bottom: 0px !important;
+        }
+        .pagination_container{
+            text-align: center;
+        }
+        .pagination{
+            margin: auto;
+        }
+
+    </style>
+    {# Flat Content <link href="{% static "bootstrap/css/bootstrap-theme.min.css" %}" rel="stylesheet"/>#}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/overrides.css" %}" />
+    <link href="{% static "css/general.css" %}" rel="stylesheet"/>
+    <link rel="icon" type="image/png" href="/static/img/favicon.ico"/>
+    <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/typicons/css/typicons.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+    <!-- <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" /> -->
+    <script type="text/javascript">
+    //<![CDATA[
+        window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";
+    //]]>
+    </script>
+    <script src="{% static "admin/js/jquery.js" %}"></script>
+
+    <!-- <script src="{% static "admin/js/jquery-migrate-1.2.1.min.js" %}"></script> -->
+    <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+
+    {% block extrahead %}{% endblock %}
+
+    {% render_with_template_if_exist 'autocomplete_light/static.html' app.name|title %}
+
+    {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+    <script type="text/javascript">
+    //<![CDATA[
+            (function($) {
+                $(document).ready(function() {
+                    $('input[type="submit"]').addClass('btn');
+                    $('[title]').tooltip();
+                });
+            }(jQuery));
+    //]]>
+    </script>
+</head>
+{% load i18n %}
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+
+<!-- Container -->
+<div class="container">
+	<imf src="{{ user.cliente.imagen_perfil }}" alt=""/>
+    {% if not is_popup %}
+    <!-- Header -->
+    <div class="navbar navbar-default navbar-fixed-top shadow">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+					<a class="navbar-brand" href="/">
+                    	<img class="logo-brand logo-img-sm" src="/static/img/logo-sm.png" alt="">
+                	</a>
+                    {% block branding %}{% endblock %}
+                </div>
+                <div class="navbar-collapse collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        {% if user.is_active and user.is_staff %}
+                        {% if user.datosadicionales.imagen_perfil %}
+                            <li><img class="perfil_navbar img-circle" src="/media/{{ user.datosadicionales.imagen_perfil }}" alt=""/></li>
+                        {% else %}
+                            <li><img class="perfil_navbar img-circle" src="/static/img/user_default.png" alt=""/></li>
+                        {% endif %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans 'Welcome,' %} <strong>{% filter force_escape %}{% firstof user.get_short_name user.get_username user.first_name user.username %}{% endfilter %}</strong> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                {% if user.has_usable_password %}
+                                <li><a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a></li>
+                                {% endif %}
+                                <li><a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a></li>
+                            </ul>
+                        </li>
+                        {% block languages %}
+                        <li class="divider-vertical"></li>
+                        {% language_selector %}
+                        {% endblock languages %}
+                        {% block logs %}
+                        <li class="dropdown" id="recent-actions-module">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-clock-o"></i> {% trans 'Recent Actions' %} <b class="caret"></b></a>
+                            {% load log %}
+                            {% get_admin_log 10 as admin_log for_user user %}
+                            <ul class="dropdown-menu">
+                                {% for entry in admin_log %}
+                                <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                                    <a href="{% if entry.is_deletion or not entry.get_admin_url %}#{% else %}{{ entry.get_admin_url }}{% endif %}">
+                                        <i class="icon-{% if entry.is_addition %}plus{% endif %}{% if entry.is_change %}edit{% endif %}{% if entry.is_deletion %}remove{% endif %}"></i>
+                                        {{ entry.object_repr }}
+                                        {% if entry.content_type %}
+                                        <span class="mini quiet">({% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %})</span>
+                                        {% else %}
+                                        <span class="mini quiet">({% trans 'Unknown content' %})</span>
+                                        {% endif %}
+                                    </a>
+                                </li>
+                                {% empty %}
+                                <li class="disabled"><a href="#">{% trans 'None available' %}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endblock %}
+                        {% block userlinks %}
+                        {% url 'django-admindocs-docroot' as docsroot %}
+                        {% if docsroot %}
+                        <li class="divider-vertical"></li>
+                        <li><a href="{{ docsroot }}">{% trans 'Documentation' %}</a></li>
+                        {% endif %}
+                        {% endblock %}
+                        {% endif %}
+                        {% block nav-global %}{% endblock %}
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <!-- END Header -->
+    <div class="row">
+        <div class="col-sm-12">
+            {% block breadcrumbs %}
+            {% endblock %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Content -->
+    <div id="content" class="{% block coltype %}colM{% endblock %}">
+        {% block navbar %}
+        <div class="navbar navbar-default">
+            <div class="navbar-inner">
+                {% block pretitle %}{% endblock %}
+                {% block content_title %}{% if title %}<a class="navbar-brand">{% render_with_template_if_exist title|lower|add:"/admin_app_name.html" title %}</a>{% endif %}{% endblock %}
+                {% block object-tools %}{% endblock %}
+            </div>
+        </div>
+        {% endblock navbar %}
+
+        {% block messages %}
+        {% if messages %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-info">
+                    <ul class="list-unstyled">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endblock messages %}
+
+        {% block content %}{{ content }}{% endblock %}
+        {% block sidebar %}{% endblock %}
+    </div>
+    <!-- END Content -->
+
+</div>
+<!-- END Container -->
+
+{% block footer %}
+{% render_with_template_if_exist_or "admin/admin_footer.html" "admin/default_footer.html" %}
+{% endblock%}
+
+{% block extra_js %}
+{% endblock %}
+</body>
+</html>
