@@ -1,0 +1,1 @@
+# dj_admin_bootstrapped
