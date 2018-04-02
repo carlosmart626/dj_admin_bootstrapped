@@ -2,6 +2,9 @@
 
 This project gives a new UI for django projects!
 
+Based in:
+[DjangoAdminBootstrapped](https://github.com/django-admin-bootstrapped/django-admin-bootstrapped)
+
 Here are some examples:
 ![Login](https://cdn.rawgit.com/carlosmart626/dj_admin_bootstrapped/master/media/dj_admin_bootstrapped-1.png)
 ![IndexAdmin](https://cdn.rawgit.com/carlosmart626/dj_admin_bootstrapped/master/media/dj_admin_bootstrapped-2.png)
