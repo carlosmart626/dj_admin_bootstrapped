@@ -55,7 +55,7 @@
 <form class="form-signin form-horizontal" action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
   <div class="form-signin-inner">
   <h2>{% render_with_template_if_exist "admin/admin_title.html" "Django administration" %}</h2>
-  <img id="logo_project" src="/static/img/logo-bg.png" alt="DjangoApp">
+  <img id="logo_project" src="{% static "img/logo-bg.png" %}" alt="DjangoApp">
   <hr>
   {% blocktrans %}<h2>Login</h2>{% endblocktrans %}
   {% if form.errors and not form.non_field_errors and not form.this_is_the_login_form.errors %}
