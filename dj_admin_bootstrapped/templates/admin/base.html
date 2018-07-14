@@ -59,9 +59,7 @@
         }
 
     </style>
-    {# Flat Content <link href="{% static "bootstrap/css/bootstrap-theme.min.css" %}" rel="stylesheet"/>#}
-    <link rel="stylesheet" type="text/css" href="{% static "admin/css/overrides.css" %}" />
-    <link href="{% static "css/general.css" %}" rel="stylesheet"/>
+    <link href="{% static "css/dj_admin_bootstrapped.css" %}" rel="stylesheet"/>
     <link rel="icon" type="image/png" href="{% static "img/favicon.ico" %}"/>
     <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
     <link href="{% static "typicons/css/typicons.css" %}" rel="stylesheet" type="text/css">
@@ -73,7 +71,7 @@
         window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";
     //]]>
     </script>
-    <script src="{% static "admin/js/jquery.js" %}"></script>
+    <script src="{% static "vendor/jquery/jquery.js" %}"></script>
 
     <!-- <script src="{% static "admin/js/jquery-migrate-1.2.1.min.js" %}"></script> -->
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
